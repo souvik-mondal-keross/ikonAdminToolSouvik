@@ -2,6 +2,7 @@
   "name": "ikonadmintool",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node ./src/index.js"
   },
@@ -9,7 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "ikonadmintool": "file:",
-    "inquirer": "^12.2.0"
+    "@inquirer/prompts": "^7.2.0",
+    "ikonadmintool": "file:"
   }
 }
