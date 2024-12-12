@@ -1,0 +1,15 @@
+{
+  "name": "ikonadmintool",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "ikonadmintool": "file:",
+    "inquirer": "^12.2.0"
+  }
+}
