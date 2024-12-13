@@ -3,7 +3,7 @@ import {input, select, } from "@inquirer/prompts";
 async function promptProcessCreation() {
 
     const processName = await input({message: "Process Name"})
-    
+
     const parentProcess = await select({
         message: "Parent Process",
         choices: [

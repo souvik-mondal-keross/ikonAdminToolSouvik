@@ -1,2 +1,8 @@
 # node modules
 node_modules/
+
+# rough work folder
+rough/
+
+#vscode config
+.vscode/
