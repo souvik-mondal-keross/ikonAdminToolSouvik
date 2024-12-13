@@ -60,5 +60,21 @@ async function writeJsonFile(filePath, jsonData) {
   }
 }
 
+/**
+ * Reads a JSON file and parses its content.
+ * @param {string} filePath - Path to the JSON file to read
+ * @returns {Promise<Object>} - Parsed JSON object
+ */
+async function readJsonFile(filePath) {
+    try {
+      const data = await fs.readFile(filePath, 'utf-8');
+      return JSON.parse(data); // Parse the JSON string into a JavaScript object
+    } catch (error) {
+      console.error(`Error reading JSON file: ${error}`);
+      throw error; // Optionally rethrow or handle the error as needed
+    }
+}
+
+
 // Export functions for use in other parts of the app
-export { checkPathExists, createFolder, createFile, writeJsonFile };
+export { checkPathExists, createFolder, createFile, writeJsonFile, readJsonFile };

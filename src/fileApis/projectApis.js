@@ -22,7 +22,7 @@ async function createProject(projectInfo,projectRootDir) {
         
         await writeJsonFile(
             path.join(projectFolderPath,'project.json'),
-            generateProjectJSON(projectInfo)
+            generateProjectJSON(projectInfo,projectFolderPath)
         )
 
         await writeJsonFile(
@@ -47,9 +47,10 @@ async function createProject(projectInfo,projectRootDir) {
 }
 
 
-function generateProjectJSON(projectInfo) {
+function generateProjectJSON(projectInfo,projectFolderPath) {
     return {
         'projectName': projectInfo.projectName,
+        'projectPath': projectFolderPath,
         'processes' : [],
     }
 }

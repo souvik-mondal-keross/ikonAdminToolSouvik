@@ -1,6 +1,16 @@
 import {input, select, } from "@inquirer/prompts";
+import path from 'path';
 
-async function promptProcessCreation() {
+async function promptProcessCreation(projectBasicData) {
+
+    const parentProcessesOptions = projectBasicData.processes.map(e => ({
+        name: e.processName,
+        value: {
+            'parent': e.processName, 
+            'path': path.join(e.path,'children')
+        },
+        description: e.processName,
+    }))
 
     const processName = await input({message: "Process Name"})
 
@@ -9,9 +19,14 @@ async function promptProcessCreation() {
         choices: [
             {
                 name: 'None',
-                value: null,
+                value: {
+                    'parent': null, 
+                    'path': path.join(projectBasicData.projectPath,'src')
+                },
                 description: 'It does not have a parent process.',
             },
+
+            ...parentProcessesOptions
         ]
     })
 
@@ -46,6 +61,7 @@ async function promptProcessCreation() {
             },
         ]
     })
+
 
     return {
         processName,

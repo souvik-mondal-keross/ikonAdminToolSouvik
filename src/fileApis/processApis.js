@@ -1,14 +1,15 @@
 import ora from "ora";
-import { checkPathExists, createFolder, createFile, writeJsonFile } from "./fileHandler.js";
+import { checkPathExists, createFolder, createFile, writeJsonFile, readJsonFile } from "./fileHandler.js";
 import path from 'path';
 
-async function createProcess(rootDirPath,processInfo) {
+async function createProcess(rootDirPath,projectBasicData,processInfo) {
 
+    const rootProjDirPath = path.join(rootDirPath)
     const processCreationProgress = ora('Creating new process.').start();
 
     try {
 
-        const processFolderPath = path.join(rootDirPath,processInfo.processName);
+        const processFolderPath = path.join(processInfo.parentProcess.path,processInfo.processName);
         const isProcessExisting = await checkPathExists(processFolderPath);
     
 
@@ -39,6 +40,16 @@ async function createProcess(rootDirPath,processInfo) {
             false
         );
 
+        projectBasicData.processes.push({
+            'processName' : processInfo.processName,
+            'path' : processFolderPath
+        })
+        
+        await writeJsonFile(
+            path.join(rootDirPath,'project.json'),
+            projectBasicData
+        )
+
         processCreationProgress.succeed("Successfully created new process.");
         
     }
@@ -46,7 +57,6 @@ async function createProcess(rootDirPath,processInfo) {
         console.error(err);
         processCreationProgress.fail("Failed to create process.");
     }
-
 }
 
 
