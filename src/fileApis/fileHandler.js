@@ -36,7 +36,7 @@ async function createFolder(folderPath, recursive = true) {
  * @param {string} content - Text content to write into the file
  * @returns {Promise<void>}
  */
-async function createFile(filePath, content) {
+async function createFile(filePath, content="") {
   try {
     await fs.writeFile(filePath, content, 'utf-8');
     console.log(`File created: ${filePath}`);

@@ -5,8 +5,6 @@ import ora from "ora";
 
 async function createProject(projectInfo,projectRootDir) {
 
-    console.log(projectInfo,projectRootDir);
-
     const projectCreationProgress = ora('Creating new project.').start();
 
     try {

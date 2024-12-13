@@ -22,7 +22,10 @@ async function createProcess(rootDirPath,projectBasicData,processInfo) {
         await createFolder(processFolderPath);
         await writeJsonFile(
             path.join(processFolderPath,'/metadata.json'),
-            processInfo
+            {
+                ...processInfo,
+                'scripts': []
+            },
         );
         await writeJsonFile(
             path.join(processFolderPath,'/process_model.json'),

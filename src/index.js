@@ -5,6 +5,8 @@ import promptProjectCreation from "./ui/projectCreation.js";
 import { Command } from "commander";
 import path from 'path';
 import { readJsonFile } from "./fileApis/fileHandler.js";
+import promptScriptCreation from "./ui/scriptCreation.js"
+import createScript from "./fileApis/scriptHandler.js";
 
 const basePath = './rough/'
 const program = new Command();
@@ -36,13 +38,28 @@ program
     const projectBasicData = await readCurrentProjectInfo();
     const processInfo = await promptProcessCreation(projectBasicData)
 
-    console.log(processInfo);
-
     await createProcess(
         path.join(basePath,'test project'),
         projectBasicData,
         processInfo
     );
+  });
+
+//Define the `createScript` command
+program
+  .command('createScript')
+  .description('Create a new script')
+  .action(async () => {
+    const projectBasicData = await readCurrentProjectInfo();
+    const scriptInfo = await promptScriptCreation(projectBasicData)
+
+    // console.log(scriptInfo)
+
+    createScript(
+      projectBasicData,
+      scriptInfo
+    )
+
   });
 
 program.parse(process.argv);
