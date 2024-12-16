@@ -9,12 +9,31 @@ async function createProject(projectInfo,projectRootDir) {
 
     try {
 
-        const projectFolderPath = path.join(projectRootDir,projectInfo.projectName);
-        const isProjectExisting= await checkPathExists(projectFolderPath);
+        const completeProjectDir = path.join(projectRootDir,projectInfo.projectName);
+
+        const isProjectExisting= await checkPathExists(completeProjectDir);
 
         if(isProjectExisting){
             projectCreationProgress.fail("Project already exists.");
+            return;
         }
+
+        await createFolder(
+            path.join(completeProjectDir),
+            false
+        )
+
+        await createFolder(
+            path.join(completeProjectDir,'backend'),
+            false
+        );
+
+        await createFolder(
+            path.join(completeProjectDir,'frontend'),
+            false
+        );
+
+        const projectFolderPath = path.join(completeProjectDir,'backend');
 
         await createFolder(projectFolderPath);
         
