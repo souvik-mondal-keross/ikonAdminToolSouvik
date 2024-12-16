@@ -9,6 +9,8 @@ import path from 'path';
 import { readJsonFile } from "./fileApis/fileHandler.js";
 import promptScriptCreation from "./ui/scriptCreation.js"
 import createScript from "./fileApis/scriptApis.js";
+import promptInstanceCreation from "./ui/instanceCreation.js";
+import { createInstance } from "./fileApis/instanceApis.js";
 
 const basePath = './'
 const program = new Command();
@@ -68,6 +70,25 @@ program
     createScript(
       projectBasicData,
       scriptInfo
+    )
+
+  });
+
+
+// Define the `createInstance` command
+
+program
+  .command('createInstance')
+  .description('Create a new instance')
+  .action(async () => {
+    const projectBasicData = await readCurrentProjectInfo();
+    const instanceInfo = await promptInstanceCreation(projectBasicData)
+
+    // console.log(scriptInfo)
+
+    createInstance(
+      projectBasicData,
+      instanceInfo
     )
 
   });

@@ -22,11 +22,9 @@ async function createProcess(rootDirPath,projectBasicData,processInfo) {
         await createFolder(processFolderPath);
         await writeJsonFile(
             path.join(processFolderPath,'/metadata.json'),
-            {
-                ...processInfo,
-                'scripts': []
-            },
+            getBaseProcessMetadata(processInfo),
         );
+
         await writeJsonFile(
             path.join(processFolderPath,'/process_model.json'),
             {}
@@ -42,7 +40,12 @@ async function createProcess(rootDirPath,projectBasicData,processInfo) {
             path.join(processFolderPath,'children'),
             false
         );
-
+        
+        await createFolder(
+            path.join(processFolderPath,'instances'),
+            false
+        );
+        
         projectBasicData.processes.push({
             'processName' : processInfo.processName,
             'path' : processFolderPath
@@ -59,6 +62,14 @@ async function createProcess(rootDirPath,projectBasicData,processInfo) {
     catch(err) {
         console.error(err);
         processCreationProgress.fail("Failed to create process.");
+    }
+}
+
+function getBaseProcessMetadata(processInfo) {
+    return {
+        ...processInfo,
+        'scripts': [],
+        'processVariableFields': []
     }
 }
 
