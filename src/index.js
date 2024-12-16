@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import createProcess from "./fileApis/processApis.js";
 import promptProcessCreation from "./ui/processCreation.js";
 import { createProject } from "./fileApis/projectApis.js";
@@ -6,18 +8,25 @@ import { Command } from "commander";
 import path from 'path';
 import { readJsonFile } from "./fileApis/fileHandler.js";
 import promptScriptCreation from "./ui/scriptCreation.js"
-import createScript from "./fileApis/scriptHandler.js";
+import createScript from "./fileApis/scriptApis.js";
 
-const basePath = './rough/'
+const basePath = './'
 const program = new Command();
 
 
 async function readCurrentProjectInfo() {
-    const projectInfo = readJsonFile(
-        path.join(basePath,'test project','project.json')
-    );
 
-    return projectInfo;
+    try{
+        const projectInfo = await readJsonFile(
+          path.join(basePath,'project.json')
+      );
+
+      return projectInfo;
+    }
+    catch(e) {
+      console.error("No project.json file found, this command can only be executed in project root directory.")
+      process.exit(1)
+    }
 }
 
 
@@ -35,11 +44,12 @@ program
   .command('createProcess')
   .description('Create a new process')
   .action(async () => {
+    
     const projectBasicData = await readCurrentProjectInfo();
     const processInfo = await promptProcessCreation(projectBasicData)
 
     await createProcess(
-        path.join(basePath,'test project'),
+        basePath,
         projectBasicData,
         processInfo
     );

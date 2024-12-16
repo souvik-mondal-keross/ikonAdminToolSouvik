@@ -48,7 +48,7 @@ async function createProject(projectInfo,projectRootDir) {
 function generateProjectJSON(projectInfo,projectFolderPath) {
     return {
         'projectName': projectInfo.projectName,
-        'projectPath': projectFolderPath,
+        'projectPath': path.resolve(projectFolderPath),
         'processes' : [],
     }
 }

@@ -40,14 +40,29 @@ async function promptScriptCreation(projectBasicData) {
 function getScriptTypes() {
     return [
         {
-            'name' : 'test1',
-            'value' : 'test1',
-            'description' : 'test1'
+            'name' : 'Process Condition',
+            'value' : 'processCondition',
+            'description' : 'Process Condition'
         },
         {
-            'name' : 'test2',
-            'value' : 'test2',
-            'description' : 'test2'
+            'name' : 'Action Validation',
+            'value' : 'actionValidation',
+            'description' : 'Action Validation'
+        },
+        {
+            'name' : 'Common Action Validation',
+            'value' : 'commonActionValidation',
+            'description' : 'Common Action Validation'
+        },
+        {
+            'name' : 'Transition Action - Before Transaction',
+            'value' : 'beforeTransaction',
+            'description' : 'Transition Action - Before Transaction'
+        },
+        {
+            'name' : 'Transition Action - After Transaction',
+            'value' : 'afterTransaction',
+            'description' : 'Transition Action - After Transaction'
         },
     ]
 }

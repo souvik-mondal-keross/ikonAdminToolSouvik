@@ -26,7 +26,7 @@ async function createScript(projectBasicData,scriptInfo){
         processMetadataInfo.scripts.push({
             'scriptName': scriptInfo.scriptName,
             'scriptType' : scriptInfo.scriptType,
-            'scriptPath': scriptFilePath,
+            'scriptPath': path.resolve(scriptFilePath),
             'id': uuid()
         })
 

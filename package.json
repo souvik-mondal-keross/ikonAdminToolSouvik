@@ -2,6 +2,9 @@
   "name": "ikonadmintool",
   "version": "1.0.0",
   "main": "index.js",
+  "bin": {
+    "ikonadmintool": "./src/index.js"
+  },
   "type": "module",
   "scripts": {
     "start": "node ./src/index.js"
@@ -12,7 +15,6 @@
   "dependencies": {
     "@inquirer/prompts": "^7.2.0",
     "commander": "^12.1.0",
-    "ikonadmintool": "file:",
     "ora": "^8.1.1"
   }
 }
